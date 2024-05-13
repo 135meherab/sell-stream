@@ -30,8 +30,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=True
-# ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+# ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS=['https://sellstream.onrender.com','http://*.127.0.0.1:8000', 'http://localhost:5173']
 #ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
