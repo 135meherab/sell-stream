@@ -1,3 +1,4 @@
+Pillow==10.0.0
 dj_database_url==2.1.0
 Django==4.2.7
 djangorestframework==3.14.0
