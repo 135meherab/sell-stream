@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -109,27 +110,14 @@ WSGI_APPLICATION = 'sellstream.wsgi.app'
 
 DATABASES = {
     'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        # "NAME": os.getenv("POSTGRES_DATABASE"),
-        # "USER": os.getenv('POSTGRES_USER'),
-        # "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
-        # "HOST": os.getenv("POSTGRES_HOST"),
-        # "PORT": os.getenv("POSTGRES_PORT"),
+        "ENGINE":  "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv("POSTGRES_DATABASE"),
+        "USER": os.getenv('POSTGRES_USER'),
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
-DATABASES['default'] = dj_database_url.config()
-
-# DATABASES = {
-#     'default': dj_database_url.config(os.getenv('DATABASE_URL')),
-# }
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
-#         default='postgresql://postgres:postgres@localhost:5432/mysite',
-#         conn_max_age=600
-#     )
-# }
 
 
 SWAGGER_SETTINGS = {
@@ -173,11 +161,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_URL = '/static/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-MEDIA_URLS ='/media/'
+STATIC_URL = 'static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build','static')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+MEDIA_URLS ='/media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
